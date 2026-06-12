@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Parce · Learn Colombian Spanish</title>
-<meta name="description" content="Parce — your personal Colombian Spanish trainer. Build sentences by typing them. No memorizing, no pressure.">
+<meta name="description" content="Parce — your personal Colombian Spanish trainer. Build sentences by typing them. No memorizing, no pressure. Full 90-day course.">
 <meta name="theme-color" content="#FCD116">
 <link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,6 @@
   .flagbar{position:fixed;top:0;left:0;right:0;height:6px;z-index:200;
     background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%)}
 
-  /* top app bar */
   .appbar{position:sticky;top:6px;z-index:190;background:rgba(255,247,222,.82);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
   .appbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
   .brand{font-family:"Fraunces";font-weight:900;font-size:1.3rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.45rem}
@@ -44,8 +43,7 @@
   .stats .s.xp{color:var(--azul-deep)}
   .stats .s.streak{color:var(--rojo-deep)}
 
-  /* hero / welcome */
-  header.hero{position:relative;padding:64px 0 46px;overflow:hidden;text-align:center}
+  header.hero{position:relative;padding:64px 0 40px;overflow:hidden;text-align:center}
   header.hero::before{content:"";position:absolute;inset:0;z-index:0;
     background:radial-gradient(70% 70% at 50% -10%,rgba(252,209,22,.9),transparent 62%),linear-gradient(180deg,var(--crema-2),var(--crema))}
   .hero .wrap{position:relative;z-index:1}
@@ -57,9 +55,8 @@
   .btn-primary{background:var(--rojo);color:#fff;box-shadow:0 12px 28px -10px rgba(206,17,38,.6)}
   .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 36px -12px rgba(206,17,38,.7)}
 
-  /* how it works strip */
   .how{padding:10px 0 0}
-  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:0}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
   @media(max-width:620px){.how-grid{grid-template-columns:1fr}}
   .how-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
   .how-item .ic{font-size:1.4rem}
@@ -70,14 +67,22 @@
   .kicker{font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.76rem;color:var(--rojo);margin-bottom:.7rem;text-align:center}
   .sec-h{font-size:clamp(1.9rem,5vw,2.8rem);text-align:center;margin-bottom:1.6rem}
 
-  /* day selector */
-  .days{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.6rem}
-  .day-chip{position:relative;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:"Fraunces";font-weight:800;font-size:1.05rem;width:54px;height:54px;border-radius:16px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+  /* stage-grouped day picker */
+  .picker{margin-bottom:1.6rem}
+  .stage-group{margin-bottom:1.1rem}
+  .stage-head{display:flex;align-items:center;gap:.6rem;margin:0 0 .55rem;font-size:.95rem;color:var(--ink-soft)}
+  .stage-head .sg-n{font-family:"Fraunces";font-weight:900;font-size:1.05rem;color:#fff;background:var(--azul);width:1.8rem;height:1.8rem;border-radius:8px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+  .stage-head b{color:var(--ink)}
+  .stage-head .sg-range{color:var(--rojo);font-weight:700;font-size:.78rem;margin-left:.3rem}
+  .stage-head .sg-prog{margin-left:auto;font-size:.78rem;font-weight:700;color:var(--verde)}
+  .chip-row{display:flex;gap:.42rem;flex-wrap:wrap}
+  .day-chip{position:relative;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:"Fraunces";font-weight:800;font-size:.95rem;width:46px;height:46px;border-radius:13px;transition:all .15s;display:flex;align-items:center;justify-content:center}
   .day-chip:hover{transform:translateY(-2px)}
   .day-chip.active{background:var(--azul);color:#fff;border-color:var(--azul)}
-  .day-chip.done::after{content:"✓";position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:var(--verde);color:#fff;font-family:sans-serif;font-size:.7rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+  .day-chip.done{background:rgba(47,125,79,.12);border-color:rgba(47,125,79,.4)}
+  .day-chip.done.active{background:var(--azul);color:#fff}
+  .day-chip.done::after{content:"✓";position:absolute;top:-5px;right:-5px;width:18px;height:18px;background:var(--verde);color:#fff;font-family:sans-serif;font-size:.65rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 
-  /* player */
   .player{background:var(--ink);border-radius:26px;padding:clamp(22px,4vw,40px);box-shadow:var(--shadow-lift);color:var(--crema);position:relative;overflow:hidden}
   .player::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%)}
   .p-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--amarillo);margin-bottom:1.3rem}
@@ -98,7 +103,7 @@
   .stuck:hover{color:var(--amarillo)}
 
   .feedback{margin-top:1.4rem;border-radius:16px;padding:1.1rem 1.2rem;opacity:0;max-height:0;overflow:hidden;transition:opacity .35s,max-height .35s,padding .35s}
-  .feedback.show{opacity:1;max-height:300px}
+  .feedback.show{opacity:1;max-height:340px}
   .feedback.ok{background:rgba(47,125,79,.18);border:1px solid rgba(47,125,79,.5)}
   .feedback.casi{background:rgba(242,184,7,.16);border:1px solid rgba(242,184,7,.5)}
   .feedback.miss{background:rgba(206,17,38,.16);border:1px solid rgba(206,17,38,.45)}
@@ -120,7 +125,6 @@
   .p-finish .es{font-family:"Fraunces";font-size:1.6rem;color:var(--amarillo);font-weight:800;margin:.3rem 0}
   .xp-pop{display:inline-block;background:var(--rojo);color:#fff;font-weight:800;padding:.2rem .7rem;border-radius:99px;font-size:.85rem}
 
-  /* journey */
   .journey{background:var(--azul-deep);color:var(--crema)}
   .journey .kicker{color:var(--amarillo)}
   .stages{display:grid;gap:.7rem}
@@ -132,7 +136,6 @@
   .stage .meta{text-align:right;font-size:.78rem;font-weight:700;color:var(--amarillo);white-space:nowrap}
   @media(max-width:560px){.stage{grid-template-columns:auto 1fr}.stage .meta{display:none}}
 
-  /* milestones */
   .miles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
   @media(max-width:680px){.miles{grid-template-columns:1fr}}
   .mile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.5rem 1.4rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
@@ -152,9 +155,6 @@
   footer .reset{margin-top:1.6rem;background:none;border:1px solid rgba(255,247,222,.25);color:rgba(255,247,222,.6);font-family:inherit;font-size:.82rem;padding:.5rem 1rem;border-radius:99px;cursor:pointer}
   footer .reset:hover{color:#fff;border-color:#fff}
   footer .fine{margin-top:1.6rem;font-size:.76rem;color:rgba(255,247,222,.38)}
-
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
-  .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
@@ -174,7 +174,7 @@
   <div class="wrap">
     <span class="eyebrow">🇨🇴 Colombian Spanish · your personal trainer</span>
     <h1 class="title">Build Spanish,<br>one <em>sentence</em> at a time.</h1>
-    <p class="promise" id="greeting">Type each answer in Spanish. No memorizing, no pressure, no failing — you just keep clicking known pieces into bigger sentences.</p>
+    <p class="promise" id="greeting">Type each answer in Spanish. No memorizing, no pressure, no failing — you just keep clicking known pieces into bigger sentences. 90 days, beginner to real conversation.</p>
     <button class="btn btn-primary" onclick="document.getElementById('train').scrollIntoView()">Start today's lesson →</button>
     <div class="how" style="margin-top:34px">
       <div class="how-grid">
@@ -189,11 +189,11 @@
 <!-- TRAINER -->
 <section id="train">
   <div class="wrap">
-    <div class="kicker">Your first week</div>
+    <div class="kicker">The full course · 90 days</div>
     <h2 class="sec-h">Pick a day. Start building.</h2>
-    <div class="days" id="dayChips"></div>
+    <div class="picker" id="picker"><p style="text-align:center;color:var(--ink-soft)">Loading lessons…</p></div>
     <div class="player" id="player">
-      <div class="p-top"><span id="pDay">Day 1</span><span id="pCount">1 / 5</span></div>
+      <div class="p-top"><span id="pDay">—</span><span id="pCount"></span></div>
       <div class="p-label">Type this in Spanish:</div>
       <div class="p-prompt" id="pPrompt"></div>
       <div class="p-note" id="pNote"></div>
@@ -216,15 +216,15 @@
 <!-- JOURNEY -->
 <section class="journey">
   <div class="wrap">
-    <div class="kicker">What's ahead · 90 days</div>
+    <div class="kicker">The journey · 90 days</div>
     <h2 class="sec-h" style="color:#fff">A trip across Colombia.</h2>
     <div class="stages">
       <div class="stage"><div class="sn">1</div><div><h4><em>Arranque</em> · Ignition</h4><p>Cognates + engine verbs: want / can / have to / going to + any verb.</p></div><div class="meta">Days 1–12</div></div>
-      <div class="stage"><div class="sn">2</div><div><h4><em>El Presente</em></h4><p>Talk about now — verbs, questions, saying no.</p></div><div class="meta">Days 13–30</div></div>
-      <div class="stage"><div class="sn">3</div><div><h4><em>Conexiones</em></h4><p>Because, but, so, when, if — plus pronouns.</p></div><div class="meta">Days 31–48</div></div>
-      <div class="stage"><div class="sn">4</div><div><h4><em>El Pasado</em></h4><p>Tell what happened, through contrast not tables.</p></div><div class="meta">Days 49–66</div></div>
+      <div class="stage"><div class="sn">2</div><div><h4><em>El Presente</em></h4><p>Talk about now — verbs, questions, ser/estar/tener, saying no.</p></div><div class="meta">Days 13–30</div></div>
+      <div class="stage"><div class="sn">3</div><div><h4><em>Conexiones</em></h4><p>Because, but, when, if — pronouns, routine, food, directions, money.</p></div><div class="meta">Days 31–48</div></div>
+      <div class="stage"><div class="sn">4</div><div><h4><em>El Pasado</em></h4><p>Tell what happened — preterite, imperfect, present perfect.</p></div><div class="meta">Days 49–66</div></div>
       <div class="stage"><div class="sn">5</div><div><h4><em>Futuro y Deseos</em></h4><p>Future, "would," and the subjunctive of wishing.</p></div><div class="meta">Days 67–82</div></div>
-      <div class="stage"><div class="sn">6</div><div><h4><em>Conversación Real</em></h4><p>Idioms, Colombian expressions, real conversation.</p></div><div class="meta">Days 83–90</div></div>
+      <div class="stage"><div class="sn">6</div><div><h4><em>Conversación Real</em></h4><p>Colombian slang, register, and real unscripted conversation.</p></div><div class="meta">Days 83–90</div></div>
     </div>
   </div>
 </section>
@@ -235,9 +235,9 @@
     <div class="kicker">Milestones</div>
     <h2 class="sec-h">Where you'll be.</h2>
     <div class="miles">
-      <div class="mile m30"><div class="big">30</div><div class="cefr">A1 · ~300 words</div><ul><li>Café & taxi, handled</li><li>Ask and answer questions</li><li>Want / can / have-to / will</li></ul></div>
+      <div class="mile m30"><div class="big">30</div><div class="cefr">A1 · ~300 words</div><ul><li>Café & taxi, handled</li><li>Ask and answer questions</li><li>Describe yourself & your day</li></ul></div>
       <div class="mile m60"><div class="big">60</div><div class="cefr">A2 · ~700 words</div><ul><li>Tell stories in the past</li><li>Link ideas naturally</li><li>Market, doctor, plans</li></ul></div>
-      <div class="mile m90"><div class="big">90</div><div class="cefr">A2+/B1 · ~1,200 words</div><ul><li>A ~10-min real conversation</li><li>Future, "would," wishes</li><li>Formal ↔ <i>parce</i>-casual</li></ul></div>
+      <div class="mile m90"><div class="big">90</div><div class="cefr">A2+/B1 · ~1,200 words</div><ul><li>A ~10-min real conversation</li><li>Future, "would," wishes</li><li>Colombian slang & register</li></ul></div>
     </div>
   </div>
 </section>
@@ -248,62 +248,20 @@
     <h3>Listo, parce. Nos vemos mañana.</h3>
     <p>Show up most days. That's the whole secret.</p>
     <button class="reset" id="btnReset">Reset my progress</button>
-    <p class="fine">A personal learning tool built on the public principles of the Michel Thomas method — guided discovery, no rote memorization, confidence through building. Original Colombian-Spanish curriculum.</p>
+    <p class="fine">A personal learning tool built on the public principles of the Michel Thomas method — guided discovery, no rote memorization, confidence through building. Original 90-day Colombian-Spanish curriculum.</p>
   </div>
 </footer>
 
 <script>
-  // ---------- content: Days 1–7 ----------
-  const DAYS=[
-    {n:1,t:"Cognates + Es",items:[
-      {en:'"It is possible."',es:'Es posible.'},
-      {en:'"It is important."',es:'Es importante.'},
-      {en:'"It is not possible."',es:'No es posible.'},
-      {en:'"It is very important for me."',es:'Es muy importante para mí.'},
-      {en:'"It is possible, but it is not important for me."',es:'Es posible, pero no es importante para mí.',v:true}
-    ]},
-    {n:2,t:"The engine: quiero",items:[
-      {en:'"I want to speak."',es:'Quiero hablar.'},
-      {en:'"I want to eat."',es:'Quiero comer.'},
-      {en:'"I want to speak Spanish."',es:'Quiero hablar español.'},
-      {en:'"I want to speak Spanish with you."',es:'Quiero hablar español contigo.'},
-      {en:'"I want to speak Spanish, but I don’t want to eat now."',es:'Quiero hablar español, pero no quiero comer ahora.',v:true}
-    ]},
-    {n:3,t:"puedo + questions",items:[
-      {en:'"I can speak Spanish."',es:'Puedo hablar español.'},
-      {en:'"Can I eat now?"',es:'¿Puedo comer ahora?'},
-      {en:'"I can do it."',es:'Puedo hacerlo.'},
-      {en:'"Can I do it now?"',es:'¿Puedo hacerlo ahora?'},
-      {en:'"Can I do it now, or is it not possible?"',es:'¿Puedo hacerlo ahora, o no es posible?',v:true}
-    ]},
-    {n:4,t:"tengo que + el tinto",items:[
-      {en:'"I have to work."',es:'Tengo que trabajar.'},
-      {en:'"I have to go now."',es:'Tengo que ir ahora.'},
-      {en:'"I want a coffee."',es:'Quiero un tinto.',note:'In Colombia a small black coffee is "un tinto".'},
-      {en:'"I want a coffee, but I have to work."',es:'Quiero un tinto, pero tengo que trabajar.'},
-      {en:'"I can’t speak now because I have to work."',es:'No puedo hablar ahora porque tengo que trabajar.',v:true}
-    ]},
-    {n:5,t:"voy a — the easy future",items:[
-      {en:'"I’m going to speak Spanish."',es:'Voy a hablar español.'},
-      {en:'"I’m going to eat now."',es:'Voy a comer ahora.'},
-      {en:'"Tomorrow I’m going to work."',es:'Mañana voy a trabajar.'},
-      {en:'"Today I have to work, but tomorrow I’m going to speak Spanish with you."',es:'Hoy tengo que trabajar, pero mañana voy a hablar español contigo.',v:true}
-    ]},
-    {n:6,t:"¿Quieres…? ¿Puedes…?",items:[
-      {en:'"Do you want to eat now?"',es:'¿Quieres comer ahora?'},
-      {en:'"Can you speak Spanish?"',es:'¿Puedes hablar español?'},
-      {en:'"Do you want a coffee?"',es:'¿Quieres un tinto?'},
-      {en:'"Do you want to speak Spanish with me tomorrow?"',es:'¿Quieres hablar español conmigo mañana?',v:true}
-    ]},
-    {n:7,t:"Putting it together",items:[
-      {en:'"I want a coffee with you today."',es:'Quiero un tinto contigo hoy.'},
-      {en:'"Can you speak Spanish now?"',es:'¿Puedes hablar español ahora?'},
-      {en:'"I’m going to speak Spanish tomorrow."',es:'Voy a hablar español mañana.'},
-      {en:'"Do you want to speak Spanish with me tomorrow, or is it not possible?"',es:'¿Quieres hablar español conmigo mañana, o no es posible?',v:true}
-    ]}
+  const STAGES=[
+    {name:"Arranque",sub:"Ignition",a:1,b:12},
+    {name:"El Presente",sub:"The present",a:13,b:30},
+    {name:"Conexiones",sub:"Connections",a:31,b:48},
+    {name:"El Pasado",sub:"The past",a:49,b:66},
+    {name:"Futuro y Deseos",sub:"Future & wishes",a:67,b:82},
+    {name:"Conversación Real",sub:"Real talk",a:83,b:90}
   ];
 
-  // ---------- storage ----------
   const KEY='parce.v1';
   const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}};
   const save=s=>localStorage.setItem(KEY,JSON.stringify(s));
@@ -321,17 +279,43 @@
   }
   paintStats();
 
-  // ---------- matching ----------
   const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[¿?¡!.,;:"'`]/g,'').replace(/\s+/g,' ').trim();
   function lev(a,b){const m=[];for(let i=0;i<=b.length;i++)m[i]=[i];for(let j=0;j<=a.length;j++)m[0][j]=j;
     for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1);
     return m[b.length][a.length];}
 
-  // ---------- player ----------
-  let dayIdx=0, qIdx=0, awarded=0;
-  const chips=$('dayChips');
-  DAYS.forEach((d,i)=>{const b=document.createElement('button');b.className='day-chip';b.textContent=d.n;b.onclick=()=>openDay(i);chips.appendChild(b);});
-  function paintChips(){[...chips.children].forEach((c,i)=>{c.classList.toggle('active',i===dayIdx);c.classList.toggle('done',state.completed.includes(DAYS[i].n));});}
+  let DAYS=[], dayIdx=0, qIdx=0, awarded=0;
+  const picker=$('picker');
+
+  function buildPicker(){
+    picker.innerHTML='';
+    STAGES.forEach((st,si)=>{
+      const grp=document.createElement('div');grp.className='stage-group';
+      const done=DAYS.filter(d=>d.n>=st.a&&d.n<=st.b&&state.completed.includes(d.n)).length;
+      const total=st.b-st.a+1;
+      const h=document.createElement('div');h.className='stage-head';
+      h.innerHTML='<span class="sg-n">'+(si+1)+'</span><span><b>'+st.name+'</b> · '+st.sub+'<span class="sg-range">Days '+st.a+'–'+st.b+'</span></span><span class="sg-prog">'+done+'/'+total+'</span>';
+      grp.appendChild(h);
+      const row=document.createElement('div');row.className='chip-row';
+      for(let n=st.a;n<=st.b;n++){
+        const idx=DAYS.findIndex(d=>d.n===n);
+        if(idx<0)continue;
+        const b=document.createElement('button');b.className='day-chip';b.textContent=n;b.dataset.idx=idx;
+        b.onclick=()=>openDay(idx);
+        row.appendChild(b);
+      }
+      grp.appendChild(row);
+      picker.appendChild(grp);
+    });
+    paintChips();
+  }
+  function paintChips(){
+    [...picker.querySelectorAll('.day-chip')].forEach(c=>{
+      const idx=+c.dataset.idx;
+      c.classList.toggle('active',idx===dayIdx);
+      c.classList.toggle('done',state.completed.includes(DAYS[idx].n));
+    });
+  }
 
   const accentChars=['á','é','í','ó','ú','ñ','¿','¡'];
   const accBox=$('accents');
@@ -344,6 +328,7 @@
     const d=DAYS[dayIdx],it=d.items[qIdx];
     $('pDay').textContent='Day '+d.n+' · '+d.t;
     $('pCount').textContent=(qIdx+1)+' / '+d.items.length;
+    $('pPrompt').className='p-prompt';
     $('pPrompt').textContent=it.v?('★ '+it.en):it.en;
     $('pNote').textContent=it.note||(it.v?'Your victory sentence — the big one.':'');
     $('pInput').value='';
@@ -356,7 +341,7 @@
     const verdict=kind==='ok'?'¡Correcto! ⭐ +'+(it.v?25:10):kind==='casi'?'¡Casi! ⭐ +5':'Así se dice 👇';
     const tip=kind==='ok'?(it.v?'That’s a real Spanish sentence. ¡Bien hecho!':'Click — another piece in place.'):kind==='casi'?'You were one keystroke away — look at the model:':'No pasa nada. Read it, say it once, and move on.';
     fb.className='feedback show '+kind;
-    fb.innerHTML='<div class="verdict">'+verdict+'</div><div class="es">'+it.es+'</div><div class="tip">'+tip+'</div>'+
+    fb.innerHTML='<div class="verdict">'+verdict+'</div><div class="es">'+it.es+'</div>'+(it.note?'<div class="tip" style="margin-bottom:.4rem">💡 '+it.note+'</div>':'')+'<div class="tip">'+tip+'</div>'+
       '<button class="btn-next" id="btnNext">'+(qIdx<DAYS[dayIdx].items.length-1?'Siguiente →':'Terminar sesión ✓')+'</button>';
     $('pInputZone').style.display='none';
     $('btnNext').onclick=next;
@@ -369,7 +354,6 @@
     if(a===b){awarded+=it.v?25:10;showFeedback('ok',it);}
     else if(lev(a,b)<=2 && a.length>4){awarded+=5;showFeedback('casi',it);}
     else{showFeedback('miss',it);}
-    paintStats.tmp=state.xp+awarded; // live preview not persisted until finish
     $('statXp').textContent=state.xp+awarded;
   }
   function next(){
@@ -380,34 +364,36 @@
   function finish(){
     state.xp+=awarded;
     if(!state.completed.includes(DAYS[dayIdx].n))state.completed.push(DAYS[dayIdx].n);
-    bumpStreak();save(state);paintStats();paintChips();
+    bumpStreak();save(state);paintStats();buildPicker();
     $('pInputZone').style.display='none';
     $('pFeedback').className='feedback';$('pFeedback').innerHTML='';
     const nextDay=dayIdx<DAYS.length-1?dayIdx+1:null;
-    $('pPrompt').innerHTML='';
     $('pDay').textContent='Day '+DAYS[dayIdx].n+' complete';
-    $('pCount').textContent='';
-    $('pNote').textContent='';
-    const host=$('player').querySelector('.p-prompt');
+    $('pCount').textContent='';$('pNote').textContent='';
+    const host=$('pPrompt');
+    host.className='p-prompt';
     host.innerHTML='<div class="p-finish"><div class="big">🎉</div><div class="es">¡Bien hecho, parce!</div>'+
-      '<p style="color:rgba(255,247,222,.72);margin:.4rem 0 1rem">You built '+DAYS[dayIdx].items.length+' sentences — no vocab list in sight. <span class="xp-pop">+'+awarded+' ⭐</span></p>'+
-      (nextDay!==null?'<button class="btn-check" id="btnGoNext" style="padding:.8rem 1.5rem">Day '+DAYS[nextDay].n+' →</button> ':'<p style="color:var(--amarillo);font-family:Fraunces;font-size:1.2rem">You’ve finished week one. 🇨🇴</p>')+
+      '<p style="color:rgba(255,247,222,.72);margin:.4rem 0 1rem">You built '+DAYS[dayIdx].items.length+' sentences. <span class="xp-pop">+'+awarded+' ⭐</span> · '+state.completed.length+'/90 days done</p>'+
+      (nextDay!==null?'<button class="btn-check" id="btnGoNext" style="padding:.8rem 1.5rem">Day '+DAYS[nextDay].n+' →</button> ':'<p style="color:var(--amarillo);font-family:Fraunces;font-size:1.3rem">🏆 You finished all 90 days. ¡Eres todo un parcero!</p>')+
       ' <button class="btn-next" id="btnRedo" style="background:transparent;border:1px solid rgba(255,247,222,.3);color:var(--crema)">Repeat this day ↻</button></div>';
-    if(nextDay!==null)$('btnGoNext').onclick=()=>{const h=$('player').querySelector('.p-prompt');h.className='p-prompt';h.innerHTML='';openDay(nextDay);};
-    $('btnRedo').onclick=()=>{const h=$('player').querySelector('.p-prompt');h.className='p-prompt';h.innerHTML='';openDay(dayIdx);};
+    if(nextDay!==null)$('btnGoNext').onclick=()=>openDay(nextDay);
+    $('btnRedo').onclick=()=>openDay(dayIdx);
   }
 
-  $('btnCheck').onclick=()=>check(false);
-  $('pInput').addEventListener('keydown',e=>{if(e.key==='Enter')check(false);});
-  $('btnStuck').onclick=()=>check(true);
-  $('btnReset').onclick=()=>{if(confirm('Reset all progress, XP and streak?')){state={xp:0,completed:[],streak:0,lastDate:null};save(state);paintStats();paintChips();openDay(0);}};
+  function startApp(){
+    buildPicker();
+    $('btnCheck').onclick=()=>check(false);
+    $('pInput').addEventListener('keydown',e=>{if(e.key==='Enter')check(false);});
+    $('btnStuck').onclick=()=>check(true);
+    $('btnReset').onclick=()=>{if(confirm('Reset all progress, XP and streak?')){state={xp:0,completed:[],streak:0,lastDate:null};save(state);paintStats();buildPicker();openDay(0);}};
+    const firstIncomplete=DAYS.findIndex(d=>!state.completed.includes(d.n));
+    openDay(firstIncomplete===-1?0:firstIncomplete);
+    if(state.completed.length){$('greeting').textContent='Welcome back, parce. '+state.completed.length+' of 90 days done — pick up where you left off.';}
+  }
 
-  // resume on the first not-yet-completed day
-  const firstIncomplete=DAYS.findIndex(d=>!state.completed.includes(d.n));
-  openDay(firstIncomplete===-1?0:firstIncomplete);
-  if(state.completed.length){$('greeting').textContent='Welcome back, parce. '+state.completed.length+' day'+(state.completed.length>1?'s':'')+' done — pick up where you left off.';}
+  fetch('curriculum.json',{cache:'no-cache'}).then(r=>r.json()).then(data=>{DAYS=data;startApp();})
+    .catch(()=>{picker.innerHTML='<p style="text-align:center;color:var(--rojo)">Couldn’t load the lessons — check your connection and refresh.</p>';});
 
-  // PWA
   if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>

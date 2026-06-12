@@ -1,10 +1,14 @@
 {
   "name": "Parce — Learn Colombian Spanish",
   "short_name": "Parce",
-  "description": "A Colombian Spanish learning app inspired by the Michel Thomas method. Speak from day one.",
+  "description": "Your personal Colombian Spanish trainer. Build sentences by typing them — no memorizing, no pressure.",
   "start_url": "./",
+  "scope": "./",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#FFF7DE",
   "theme_color": "#FCD116",
-  "icons": []
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
 }

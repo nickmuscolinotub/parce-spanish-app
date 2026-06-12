@@ -2,570 +2,413 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Parce · Learn Spanish the way a good teacher would actually teach you</title>
-<meta name="description" content="Parce — a Colombian Spanish learning app inspired by the Michel Thomas method. No memorization, guided discovery, speak from day one. Concept, 90-day curriculum, and build spec.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Parce · Learn Colombian Spanish</title>
+<meta name="description" content="Parce — your personal Colombian Spanish trainer. Build sentences by typing them. No memorizing, no pressure.">
 <meta name="theme-color" content="#FCD116">
 <link rel="manifest" href="manifest.json">
-<meta property="og:title" content="Parce · Colombian Spanish, the way a good teacher would teach it">
-<meta property="og:description" content="No memorization. Guided discovery. You speak full Spanish sentences out loud on day one.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --amarillo:#FCD116;
-    --amarillo-deep:#F2B807;
-    --crema:#FFF7DE;
-    --crema-2:#FFFBF0;
-    --azul:#003893;
-    --azul-deep:#00266B;
-    --rojo:#CE1126;
-    --rojo-deep:#A60D1C;
-    --ink:#0A1733;
-    --ink-soft:#2A3554;
-    --verde:#2F7D4F;
+    --amarillo:#FCD116;--amarillo-deep:#F2B807;
+    --crema:#FFF7DE;--crema-2:#FFFBF0;
+    --azul:#003893;--azul-deep:#00266B;
+    --rojo:#CE1126;--rojo-deep:#A60D1C;
+    --ink:#0A1733;--ink-soft:#2A3554;--verde:#2F7D4F;
     --line:rgba(10,23,51,.14);
     --shadow:0 18px 40px -18px rgba(0,38,107,.45);
     --shadow-lift:0 30px 70px -24px rgba(0,38,107,.55);
-    --maxw:1180px;
+    --maxw:920px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{
-    font-family:"Hanken Grotesk",system-ui,sans-serif;
-    color:var(--ink);
-    background:var(--crema);
-    line-height:1.55;
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  /* grain overlay */
-  body::after{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
+  body{font-family:"Hanken Grotesk",system-ui,sans-serif;color:var(--ink);background:var(--crema);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
   ::selection{background:var(--rojo);color:#fff}
-  a{color:inherit}
   h1,h2,h3,h4{font-family:"Fraunces",Georgia,serif;font-weight:800;line-height:1.02;letter-spacing:-.02em}
-  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
 
-  /* ── flag bar / nav ── */
-  .flagbar{position:fixed;top:0;left:0;right:0;height:7px;z-index:200;
-    background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%);}
-  nav{position:fixed;top:7px;left:0;right:0;z-index:190;
-    backdrop-filter:saturate(140%) blur(10px);
-    background:rgba(255,247,222,.72);border-bottom:1px solid var(--line);
-    transition:transform .4s ease}
-  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-  .brand{font-family:"Fraunces";font-weight:900;font-size:1.35rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.4rem}
-  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--rojo);display:inline-block;box-shadow:0 0 0 4px rgba(206,17,38,.18)}
-  .navlinks{display:flex;gap:1.6rem;font-weight:600;font-size:.93rem}
-  .navlinks a{text-decoration:none;opacity:.72;transition:opacity .2s}
-  .navlinks a:hover{opacity:1}
-  .navgh{background:var(--ink);color:var(--crema);padding:.5rem .9rem;border-radius:999px;font-weight:700;font-size:.85rem;text-decoration:none;transition:transform .2s,background .2s}
-  .navgh:hover{transform:translateY(-2px);background:var(--azul-deep)}
-  @media(max-width:760px){.navlinks{display:none}}
+  .flagbar{position:fixed;top:0;left:0;right:0;height:6px;z-index:200;
+    background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%)}
 
-  /* ── hero ── */
-  header.hero{position:relative;padding:160px 0 90px;overflow:hidden}
-  header.hero::before{
-    content:"";position:absolute;inset:0;z-index:0;
-    background:
-      radial-gradient(60% 55% at 78% 12%,rgba(252,209,22,.95),transparent 60%),
-      radial-gradient(50% 50% at 12% 90%,rgba(0,56,147,.18),transparent 62%),
-      radial-gradient(40% 40% at 95% 80%,rgba(206,17,38,.14),transparent 60%),
-      linear-gradient(180deg,var(--crema-2),var(--crema));
-  }
-  .hero .wrap{position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:54px;align-items:center}
-  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr;gap:44px}}
-  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--azul-deep);background:rgba(0,56,147,.09);padding:.4rem .85rem;border-radius:999px;margin-bottom:1.4rem}
-  h1.title{font-size:clamp(3.4rem,9vw,6.6rem);line-height:.92}
-  h1.title em{font-style:italic;color:var(--rojo);font-weight:900}
-  .lede{font-size:clamp(1.1rem,2.2vw,1.4rem);max-width:34ch;margin:1.5rem 0 .4rem;color:var(--ink-soft);font-weight:500}
-  .promise{font-family:"Fraunces";font-style:italic;font-size:1.18rem;line-height:1.45;color:var(--ink);
-    border-left:4px solid var(--amarillo-deep);padding:.4rem 0 .4rem 1.1rem;margin:1.8rem 0 2.2rem;max-width:40ch}
-  .cta-row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
-  .btn{display:inline-flex;align-items:center;gap:.55rem;font-weight:700;text-decoration:none;border-radius:999px;padding:.95rem 1.5rem;font-size:1rem;transition:transform .2s,box-shadow .2s}
+  /* top app bar */
+  .appbar{position:sticky;top:6px;z-index:190;background:rgba(255,247,222,.82);backdrop-filter:saturate(140%) blur(10px);border-bottom:1px solid var(--line)}
+  .appbar .wrap{display:flex;align-items:center;justify-content:space-between;height:58px}
+  .brand{font-family:"Fraunces";font-weight:900;font-size:1.3rem;letter-spacing:-.03em;display:flex;align-items:center;gap:.45rem}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--rojo);box-shadow:0 0 0 4px rgba(206,17,38,.18)}
+  .stats{display:flex;gap:.9rem;font-weight:800;font-size:.95rem}
+  .stats .s{display:flex;align-items:center;gap:.3rem;background:rgba(0,38,107,.07);padding:.3rem .7rem;border-radius:99px}
+  .stats .s.xp{color:var(--azul-deep)}
+  .stats .s.streak{color:var(--rojo-deep)}
+
+  /* hero / welcome */
+  header.hero{position:relative;padding:64px 0 46px;overflow:hidden;text-align:center}
+  header.hero::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(70% 70% at 50% -10%,rgba(252,209,22,.9),transparent 62%),linear-gradient(180deg,var(--crema-2),var(--crema))}
+  .hero .wrap{position:relative;z-index:1}
+  .eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--azul-deep);background:rgba(0,56,147,.09);padding:.4rem .85rem;border-radius:999px;margin-bottom:1.2rem}
+  h1.title{font-size:clamp(2.6rem,8vw,4.4rem);line-height:.94}
+  h1.title em{font-style:italic;color:var(--rojo)}
+  .promise{font-family:"Fraunces";font-style:italic;font-size:1.12rem;line-height:1.45;color:var(--ink-soft);max-width:40ch;margin:1.2rem auto 1.8rem}
+  .btn{display:inline-flex;align-items:center;gap:.55rem;font-family:inherit;font-weight:700;text-decoration:none;border:none;cursor:pointer;border-radius:999px;padding:1rem 1.7rem;font-size:1.05rem;transition:transform .2s,box-shadow .2s}
   .btn-primary{background:var(--rojo);color:#fff;box-shadow:0 12px 28px -10px rgba(206,17,38,.6)}
   .btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 36px -12px rgba(206,17,38,.7)}
-  .btn-ghost{color:var(--ink);border:1.5px solid var(--ink);background:transparent}
-  .btn-ghost:hover{transform:translateY(-3px);background:var(--ink);color:var(--crema)}
 
-  /* hero phone / lesson card */
-  .device{position:relative;justify-self:center;width:300px;max-width:88vw;
-    background:var(--ink);border-radius:42px;padding:14px;box-shadow:var(--shadow-lift);transform:rotate(2.5deg)}
-  .device::before{content:"";position:absolute;top:22px;left:50%;transform:translateX(-50%);width:90px;height:6px;border-radius:99px;background:rgba(255,255,255,.25)}
-  .screen{background:linear-gradient(170deg,var(--amarillo) 0%,var(--crema-2) 58%);border-radius:30px;padding:30px 22px 24px;min-height:520px;display:flex;flex-direction:column}
-  .screen-top{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:.82rem;color:var(--azul-deep)}
-  .pill{background:rgba(0,38,107,.1);padding:.25rem .6rem;border-radius:99px}
-  .screen h3{font-size:1.05rem;margin:1.4rem 0 .2rem;color:var(--ink)}
-  .float-card{margin-top:auto}
+  /* how it works strip */
+  .how{padding:10px 0 0}
+  .how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:0}
+  @media(max-width:620px){.how-grid{grid-template-columns:1fr}}
+  .how-item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+  .how-item .ic{font-size:1.4rem}
+  .how-item h4{font-size:1.02rem;margin:.4rem 0 .2rem}
+  .how-item p{font-size:.9rem;color:var(--ink-soft)}
 
-  /* generic section */
-  section{position:relative;padding:92px 0}
-  .kicker{font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.78rem;color:var(--rojo);margin-bottom:.9rem}
-  .sec-h{font-size:clamp(2.1rem,5vw,3.4rem);max-width:18ch;margin-bottom:1.1rem}
-  .sec-sub{font-size:1.1rem;color:var(--ink-soft);max-width:54ch;margin-bottom:3rem}
+  section{padding:46px 0}
+  .kicker{font-weight:800;letter-spacing:.16em;text-transform:uppercase;font-size:.76rem;color:var(--rojo);margin-bottom:.7rem;text-align:center}
+  .sec-h{font-size:clamp(1.9rem,5vw,2.8rem);text-align:center;margin-bottom:1.6rem}
 
-  /* laws */
-  .laws{background:var(--ink);color:var(--crema)}
-  .laws .kicker{color:var(--amarillo)}
-  .laws .sec-sub{color:rgba(255,247,222,.7)}
-  .laws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:rgba(255,247,222,.14);border:1px solid rgba(255,247,222,.14);border-radius:20px;overflow:hidden}
-  .law{background:var(--ink);padding:2rem 1.6rem;transition:background .3s}
-  .law:hover{background:var(--azul-deep)}
-  .law .n{font-family:"Fraunces";font-weight:900;font-size:2.4rem;color:var(--amarillo);line-height:1}
-  .law h4{font-size:1.18rem;margin:.7rem 0 .5rem;color:#fff}
-  .law p{color:rgba(255,247,222,.72);font-size:.96rem}
+  /* day selector */
+  .days{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:1.6rem}
+  .day-chip{position:relative;cursor:pointer;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:"Fraunces";font-weight:800;font-size:1.05rem;width:54px;height:54px;border-radius:16px;transition:all .2s;display:flex;align-items:center;justify-content:center}
+  .day-chip:hover{transform:translateY(-2px)}
+  .day-chip.active{background:var(--azul);color:#fff;border-color:var(--azul)}
+  .day-chip.done::after{content:"✓";position:absolute;top:-6px;right:-6px;width:20px;height:20px;background:var(--verde);color:#fff;font-family:sans-serif;font-size:.7rem;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 
-  /* ── interactive demo ── */
-  .demo{background:radial-gradient(70% 90% at 80% 0%,rgba(252,209,22,.35),transparent 55%),var(--crema-2)}
-  .demo-card{background:var(--ink);border-radius:30px;padding:clamp(26px,4vw,48px);box-shadow:var(--shadow-lift);color:var(--crema);max-width:760px;margin:0 auto;position:relative;overflow:hidden}
-  .demo-card::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%)}
-  .demo-step{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--amarillo);margin-bottom:1.4rem}
-  .demo-prompt-label{color:rgba(255,247,222,.6);font-weight:600;font-size:.9rem;letter-spacing:.04em;margin-bottom:.5rem}
-  .demo-prompt{font-family:"Fraunces";font-size:clamp(1.6rem,4vw,2.3rem);font-weight:700;color:#fff;line-height:1.12;min-height:1.2em}
-  .demo-hint{margin-top:1rem;color:rgba(255,247,222,.6);font-style:italic;font-size:.98rem}
-  .demo-answer{margin-top:1.6rem;background:rgba(252,209,22,.12);border:1px solid rgba(252,209,22,.35);border-radius:16px;padding:1.2rem 1.3rem;
-    opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s;pointer-events:none}
-  .demo-answer.show{opacity:1;transform:none;pointer-events:auto}
-  .demo-answer .es{font-family:"Fraunces";font-size:1.5rem;font-weight:700;color:var(--amarillo)}
-  .demo-answer .say{display:inline-block;margin-top:.4rem;color:rgba(255,247,222,.7);font-size:.92rem}
-  .demo-actions{margin-top:1.7rem;display:flex;gap:.7rem;flex-wrap:wrap}
-  .da{flex:1;min-width:130px;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:1rem;padding:.95rem 1rem;border-radius:14px;transition:transform .15s,filter .2s;color:#fff}
-  .da:hover{transform:translateY(-2px);filter:brightness(1.08)}
-  .da.reveal{background:var(--amarillo);color:var(--ink);flex-basis:100%}
-  .da.green{background:var(--verde)}
-  .da.yellow{background:var(--amarillo-deep);color:var(--ink)}
-  .da.red{background:var(--rojo)}
-  .demo-progress{display:flex;gap:6px;margin-top:1.6rem}
-  .demo-progress span{height:5px;flex:1;border-radius:99px;background:rgba(255,247,222,.18);transition:background .3s}
-  .demo-progress span.done{background:var(--amarillo)}
-  .demo-done{text-align:center;padding:1rem 0 .2rem}
-  .demo-done .es{font-family:"Fraunces";font-size:1.7rem;color:var(--amarillo);font-weight:800}
-  .xp-pop{display:inline-block;background:var(--rojo);color:#fff;font-weight:800;padding:.2rem .7rem;border-radius:99px;font-size:.85rem;margin-left:.4rem}
+  /* player */
+  .player{background:var(--ink);border-radius:26px;padding:clamp(22px,4vw,40px);box-shadow:var(--shadow-lift);color:var(--crema);position:relative;overflow:hidden}
+  .player::before{content:"";position:absolute;top:0;left:0;right:0;height:6px;background:linear-gradient(to right,var(--amarillo) 0 50%,var(--azul) 50% 75%,var(--rojo) 75% 100%)}
+  .p-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--amarillo);margin-bottom:1.3rem}
+  .p-label{color:rgba(255,247,222,.6);font-weight:600;font-size:.92rem;margin-bottom:.5rem}
+  .p-prompt{font-family:"Fraunces";font-size:clamp(1.5rem,4.4vw,2.1rem);font-weight:700;color:#fff;line-height:1.14;min-height:1.2em}
+  .p-note{margin-top:.6rem;color:rgba(255,247,222,.55);font-size:.86rem;font-style:italic}
 
-  /* roadmap journey */
-  .road{background:var(--azul-deep);color:var(--crema);overflow:hidden}
-  .road .kicker{color:var(--amarillo)}
-  .road .sec-sub{color:rgba(255,247,222,.72)}
-  .stages{display:grid;gap:1rem}
-  .stage{display:grid;grid-template-columns:auto 1fr auto;gap:1.4rem;align-items:center;
-    background:rgba(255,247,222,.06);border:1px solid rgba(255,247,222,.12);border-radius:18px;padding:1.3rem 1.5rem;transition:transform .25s,background .25s}
-  .stage:hover{transform:translateX(8px);background:rgba(252,209,22,.12)}
-  .stage .sn{font-family:"Fraunces";font-weight:900;font-size:2rem;color:var(--amarillo);width:2.4rem;text-align:center}
-  .stage h4{font-size:1.25rem;color:#fff}
-  .stage h4 em{font-style:normal;color:var(--amarillo);font-family:inherit}
-  .stage p{color:rgba(255,247,222,.72);font-size:.96rem;margin-top:.2rem}
-  .stage .meta{text-align:right;font-size:.82rem;font-weight:700;color:rgba(255,247,222,.85);white-space:nowrap}
-  .stage .meta .cefr{display:block;color:var(--amarillo);font-family:"JetBrains Mono",monospace;margin-top:.2rem}
-  @media(max-width:680px){.stage{grid-template-columns:auto 1fr}.stage .meta{grid-column:2;text-align:left}}
+  .accents{display:flex;gap:.35rem;flex-wrap:wrap;margin:1.3rem 0 .6rem}
+  .accents button{cursor:pointer;border:1px solid rgba(255,247,222,.22);background:rgba(255,247,222,.06);color:var(--crema);font-family:inherit;font-size:1rem;width:38px;height:38px;border-radius:10px;transition:background .15s}
+  .accents button:hover{background:rgba(252,209,22,.2)}
+  .answer-row{display:flex;gap:.6rem;flex-wrap:wrap}
+  #pInput{flex:1;min-width:200px;font-family:inherit;font-size:1.15rem;padding:.9rem 1.1rem;border-radius:14px;border:2px solid rgba(255,247,222,.2);background:rgba(255,247,222,.06);color:#fff;outline:none;transition:border-color .2s}
+  #pInput:focus{border-color:var(--amarillo)}
+  #pInput::placeholder{color:rgba(255,247,222,.4)}
+  .btn-check{background:var(--amarillo);color:var(--ink);font-weight:800;border:none;cursor:pointer;font-family:inherit;font-size:1.05rem;padding:0 1.6rem;border-radius:14px;transition:transform .15s,filter .2s}
+  .btn-check:hover{transform:translateY(-2px);filter:brightness(1.05)}
+  .stuck{display:inline-block;margin-top:.9rem;color:rgba(255,247,222,.55);font-size:.88rem;text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit}
+  .stuck:hover{color:var(--amarillo)}
 
-  /* daily 20 */
-  .daily-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.1rem}
-  .step-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.5rem;box-shadow:var(--shadow);transition:transform .25s}
-  .step-card:hover{transform:translateY(-6px)}
-  .step-card .t{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--rojo);font-weight:600}
-  .step-card .num{font-family:"Fraunces";font-weight:900;font-size:1.6rem;color:var(--azul)}
-  .step-card h4{font-size:1.08rem;margin:.3rem 0 .4rem}
-  .step-card p{font-size:.92rem;color:var(--ink-soft)}
+  .feedback{margin-top:1.4rem;border-radius:16px;padding:1.1rem 1.2rem;opacity:0;max-height:0;overflow:hidden;transition:opacity .35s,max-height .35s,padding .35s}
+  .feedback.show{opacity:1;max-height:300px}
+  .feedback.ok{background:rgba(47,125,79,.18);border:1px solid rgba(47,125,79,.5)}
+  .feedback.casi{background:rgba(242,184,7,.16);border:1px solid rgba(242,184,7,.5)}
+  .feedback.miss{background:rgba(206,17,38,.16);border:1px solid rgba(206,17,38,.45)}
+  .feedback .verdict{font-weight:800;font-size:1.05rem}
+  .feedback.ok .verdict{color:#7fe0a6}
+  .feedback.casi .verdict{color:var(--amarillo)}
+  .feedback.miss .verdict{color:#ff9aa5}
+  .feedback .es{font-family:"Fraunces";font-size:1.45rem;font-weight:700;color:#fff;margin:.4rem 0 .2rem}
+  .feedback .tip{color:rgba(255,247,222,.7);font-size:.92rem}
+  .btn-next{margin-top:1rem;background:#fff;color:var(--ink);font-weight:800;border:none;cursor:pointer;font-family:inherit;font-size:1rem;padding:.7rem 1.3rem;border-radius:12px;transition:transform .15s}
+  .btn-next:hover{transform:translateY(-2px)}
 
-  /* features / addictive */
-  .feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
-  .feat{background:#fff;border-radius:20px;padding:1.8rem;border:1px solid var(--line);box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .feat .ic{font-size:1.8rem}
-  .feat h4{font-size:1.2rem;margin:.7rem 0 .5rem}
-  .feat p{color:var(--ink-soft);font-size:.96rem}
-  .feat .tag{position:absolute;top:1.2rem;right:1.2rem;font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--verde);background:rgba(47,125,79,.12);padding:.25rem .55rem;border-radius:99px}
+  .p-prog{display:flex;gap:6px;margin-top:1.5rem}
+  .p-prog span{height:5px;flex:1;border-radius:99px;background:rgba(255,247,222,.18);transition:background .3s}
+  .p-prog span.done{background:var(--amarillo)}
 
-  /* days tabs */
-  .days{background:var(--ink);color:var(--crema)}
-  .days .kicker{color:var(--amarillo)}
-  .day-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.8rem}
-  .day-tab{cursor:pointer;border:1px solid rgba(255,247,222,.2);background:transparent;color:var(--crema);font-family:"Fraunces";font-weight:800;font-size:1rem;width:48px;height:48px;border-radius:14px;transition:all .2s}
-  .day-tab.active{background:var(--amarillo);color:var(--ink);border-color:var(--amarillo)}
-  .day-panel{background:rgba(255,247,222,.05);border:1px solid rgba(255,247,222,.12);border-radius:20px;padding:clamp(22px,3vw,36px);min-height:280px}
-  .day-panel .dtitle{font-family:"Fraunces";font-size:1.5rem;color:var(--amarillo);font-weight:800;margin-bottom:1rem}
-  .exch{margin:.7rem 0;padding-left:1rem;border-left:2px solid rgba(252,209,22,.4)}
-  .exch .q{color:rgba(255,247,222,.78);font-style:italic}
-  .exch .a{font-family:"Fraunces";font-size:1.2rem;color:#fff;font-weight:700}
-  .victory{margin-top:1.4rem;background:rgba(206,17,38,.16);border:1px solid rgba(206,17,38,.4);border-radius:14px;padding:1.1rem 1.2rem}
-  .victory .lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--rojo);color:#ff8a96}
-  .victory .a{font-family:"Fraunces";font-size:1.25rem;color:var(--amarillo);font-weight:800;margin-top:.3rem}
+  .p-finish{text-align:center;padding:.5rem 0}
+  .p-finish .big{font-size:2.6rem}
+  .p-finish .es{font-family:"Fraunces";font-size:1.6rem;color:var(--amarillo);font-weight:800;margin:.3rem 0}
+  .xp-pop{display:inline-block;background:var(--rojo);color:#fff;font-weight:800;padding:.2rem .7rem;border-radius:99px;font-size:.85rem}
+
+  /* journey */
+  .journey{background:var(--azul-deep);color:var(--crema)}
+  .journey .kicker{color:var(--amarillo)}
+  .stages{display:grid;gap:.7rem}
+  .stage{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;background:rgba(255,247,222,.06);border:1px solid rgba(255,247,222,.12);border-radius:14px;padding:1rem 1.2rem}
+  .stage .sn{font-family:"Fraunces";font-weight:900;font-size:1.6rem;color:var(--amarillo);width:2rem;text-align:center}
+  .stage h4{font-size:1.08rem;color:#fff}
+  .stage h4 em{font-style:normal;color:var(--amarillo)}
+  .stage p{color:rgba(255,247,222,.7);font-size:.88rem;margin-top:.15rem}
+  .stage .meta{text-align:right;font-size:.78rem;font-weight:700;color:var(--amarillo);white-space:nowrap}
+  @media(max-width:560px){.stage{grid-template-columns:auto 1fr}.stage .meta{display:none}}
 
   /* milestones */
-  .miles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
-  @media(max-width:780px){.miles{grid-template-columns:1fr}}
-  .mile{background:#fff;border:1px solid var(--line);border-radius:22px;padding:2rem 1.7rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
-  .mile::before{content:"";position:absolute;top:0;left:0;width:100%;height:6px}
-  .mile.m30::before{background:var(--amarillo)}
-  .mile.m60::before{background:var(--azul)}
-  .mile.m90::before{background:var(--rojo)}
-  .mile .big{font-family:"Fraunces";font-weight:900;font-size:3rem;line-height:.9;color:var(--ink)}
-  .mile .cefr{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--rojo);font-size:.9rem;margin:.3rem 0 1rem}
-  .mile ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-  .mile li{padding-left:1.4rem;position:relative;font-size:.96rem;color:var(--ink-soft)}
+  .miles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+  @media(max-width:680px){.miles{grid-template-columns:1fr}}
+  .mile{background:#fff;border:1px solid var(--line);border-radius:18px;padding:1.5rem 1.4rem;box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .mile::before{content:"";position:absolute;top:0;left:0;width:100%;height:5px}
+  .mile.m30::before{background:var(--amarillo)}.mile.m60::before{background:var(--azul)}.mile.m90::before{background:var(--rojo)}
+  .mile .big{font-family:"Fraunces";font-weight:900;font-size:2.4rem;color:var(--ink)}
+  .mile .cefr{color:var(--rojo);font-weight:700;font-size:.85rem;margin:.2rem 0 .8rem}
+  .mile ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+  .mile li{padding-left:1.3rem;position:relative;font-size:.92rem;color:var(--ink-soft)}
   .mile li::before{content:"→";position:absolute;left:0;color:var(--azul);font-weight:800}
 
-  /* dev spec */
-  .dev{background:var(--crema-2)}
-  .spec-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:2.4rem;align-items:start}
-  @media(max-width:820px){.spec-grid{grid-template-columns:1fr}}
-  .stack-table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);font-size:.94rem}
-  .stack-table td{padding:.8rem 1rem;border-bottom:1px solid var(--line)}
-  .stack-table tr:last-child td{border-bottom:none}
-  .stack-table td:first-child{font-weight:700;color:var(--azul-deep);white-space:nowrap}
-  .stack-table td:last-child{color:var(--ink-soft)}
-  pre{background:var(--ink);color:var(--crema);border-radius:16px;padding:1.4rem;overflow-x:auto;font-family:"JetBrains Mono",monospace;font-size:.82rem;line-height:1.6;box-shadow:var(--shadow)}
-  pre .c{color:#7fd1a6}.pre .k{color:var(--amarillo)}
-  .palette{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
-  .sw{flex:1;min-width:90px;border-radius:14px;padding:1rem .8rem;font-family:"JetBrains Mono",monospace;font-size:.72rem;font-weight:600;box-shadow:var(--shadow)}
+  footer{background:var(--ink);color:var(--crema);padding:48px 0 60px;text-align:center}
+  footer .flagdots{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.1rem}
+  footer .flagdots span{width:13px;height:13px;border-radius:50%}
+  footer h3{font-size:clamp(1.5rem,4vw,2.1rem);margin-bottom:.6rem}
+  footer p{color:rgba(255,247,222,.6);max-width:48ch;margin:0 auto;font-size:.92rem}
+  footer .reset{margin-top:1.6rem;background:none;border:1px solid rgba(255,247,222,.25);color:rgba(255,247,222,.6);font-family:inherit;font-size:.82rem;padding:.5rem 1rem;border-radius:99px;cursor:pointer}
+  footer .reset:hover{color:#fff;border-color:#fff}
+  footer .fine{margin-top:1.6rem;font-size:.76rem;color:rgba(255,247,222,.38)}
 
-  /* footer */
-  footer{background:var(--ink);color:var(--crema);padding:70px 0 50px;text-align:center}
-  footer .flagdots{display:flex;gap:.5rem;justify-content:center;margin-bottom:1.5rem}
-  footer .flagdots span{width:14px;height:14px;border-radius:50%}
-  footer h3{font-size:clamp(1.8rem,4vw,2.6rem);margin-bottom:1rem}
-  footer .gh{display:inline-flex;align-items:center;gap:.6rem;background:var(--amarillo);color:var(--ink);font-weight:800;text-decoration:none;padding:.9rem 1.6rem;border-radius:999px;margin-top:1rem;transition:transform .2s}
-  footer .gh:hover{transform:translateY(-3px)}
-  footer .fine{margin-top:2.4rem;font-size:.82rem;color:rgba(255,247,222,.5);max-width:60ch;margin-left:auto;margin-right:auto}
-
-  /* reveal on scroll */
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
   .reveal.in{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
 <div class="flagbar"></div>
-<nav id="nav">
+<div class="appbar">
   <div class="wrap">
     <div class="brand"><span class="dot"></span>Parce</div>
-    <div class="navlinks">
-      <a href="#method">Method</a>
-      <a href="#try">Try a lesson</a>
-      <a href="#road">Curriculum</a>
-      <a href="#days">First week</a>
-      <a href="#dev">For devs</a>
+    <div class="stats">
+      <span class="s streak" title="Day streak">🔥 <span id="statStreak">0</span></span>
+      <span class="s xp" title="Estrellas earned">⭐ <span id="statXp">0</span></span>
     </div>
-    <a class="navgh" href="https://github.com/nickmuscolinotub/parce-spanish-app" target="_blank" rel="noopener">View on GitHub ↗</a>
   </div>
-</nav>
+</div>
 
-<!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div>
-      <span class="eyebrow">🇨🇴 Colombian Spanish · inspired by the Michel Thomas method</span>
-      <h1 class="title">Speak Spanish<br>from <em>day one</em>.</h1>
-      <p class="lede">A patient teacher in your pocket that builds Spanish <i>with</i> you — no lists, no cramming, no fear.</p>
-      <p class="promise">"In your first week you'll build full sentences out loud. In 90 days you'll hold a real conversation with a Colombian — and you'll never once have sat down to memorize a vocab list."</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="#try">Try a lesson now →</a>
-        <a class="btn btn-ghost" href="#road">See the 90-day path</a>
-      </div>
-    </div>
-    <div class="device" aria-hidden="true">
-      <div class="screen">
-        <div class="screen-top"><span>🔥 14</span><span class="pill">Día 2 · Arranque</span><span>⭐ 980</span></div>
-        <h3>El motor: <i>quiero</i></h3>
-        <div class="demo-prompt-label" style="color:var(--ink-soft)">Say in Spanish:</div>
-        <div style="font-family:Fraunces;font-size:1.5rem;font-weight:700;margin-top:.2rem">"I want to speak Spanish with you."</div>
-        <div class="float-card">
-          <div style="background:#fff;border-radius:16px;padding:1rem 1.1rem;box-shadow:0 10px 30px -12px rgba(0,38,107,.4)">
-            <div style="font-family:Fraunces;color:var(--rojo);font-weight:800;font-size:1.25rem">Quiero hablar español contigo.</div>
-            <div style="display:flex;gap:.4rem;margin-top:.8rem">
-              <span style="flex:1;text-align:center;background:var(--verde);color:#fff;border-radius:10px;padding:.4rem;font-size:.8rem;font-weight:700">Lo dije</span>
-              <span style="flex:1;text-align:center;background:var(--amarillo-deep);border-radius:10px;padding:.4rem;font-size:.8rem;font-weight:700">Casi</span>
-              <span style="flex:1;text-align:center;background:var(--rojo);color:#fff;border-radius:10px;padding:.4rem;font-size:.8rem;font-weight:700">Se me fue</span>
-            </div>
-          </div>
-        </div>
+    <span class="eyebrow">🇨🇴 Colombian Spanish · your personal trainer</span>
+    <h1 class="title">Build Spanish,<br>one <em>sentence</em> at a time.</h1>
+    <p class="promise" id="greeting">Type each answer in Spanish. No memorizing, no pressure, no failing — you just keep clicking known pieces into bigger sentences.</p>
+    <button class="btn btn-primary" onclick="document.getElementById('train').scrollIntoView()">Start today's lesson →</button>
+    <div class="how" style="margin-top:34px">
+      <div class="how-grid">
+        <div class="how-item"><div class="ic">⌨️</div><h4>Type it</h4><p>Produce the answer yourself — accents optional, we're forgiving.</p></div>
+        <div class="how-item"><div class="ic">🧩</div><h4>No memorizing</h4><p>Discover patterns and build. Lists are the enemy.</p></div>
+        <div class="how-item"><div class="ic">🌤️</div><h4>No failing</h4><p>Stuck? Tap to see it. Nothing is ever marked "wrong."</p></div>
       </div>
     </div>
   </div>
 </header>
 
-<!-- FIVE LAWS -->
-<section class="laws" id="method">
+<!-- TRAINER -->
+<section id="train">
   <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">The method</div>
-      <h2 class="sec-h">Five laws every screen obeys.</h2>
-      <p class="sec-sub">Most apps treat you like a database to be filled. Parce does the opposite — it teaches the way a great human teacher would, and takes the blame when something doesn't stick.</p>
-    </div>
-    <div class="laws-grid reveal">
-      <div class="law"><div class="n">01</div><h4>No memorization</h4><p>Nothing is a list to drill. Everything is <i>built</i>. Discover a pattern, own a hundred words.</p></div>
-      <div class="law"><div class="n">02</div><h4>Audio-first</h4><p>Eyes free, mouth working. Learn while you walk, drive, or wash the dishes.</p></div>
-      <div class="law"><div class="n">03</div><h4>No failure state</h4><p>Never "wrong." A missed phrase gets gently re-taught. The responsibility is the teacher's, not yours.</p></div>
-      <div class="law"><div class="n">04</div><h4>Think, then speak</h4><p>Every prompt is a small puzzle. You pause, assemble it, say it aloud — <i>then</i> hear the model.</p></div>
-      <div class="law"><div class="n">05</div><h4>Long sentences early</h4><p>Confidence comes from capability. Big sentences are just small known pieces clicked together.</p></div>
+    <div class="kicker">Your first week</div>
+    <h2 class="sec-h">Pick a day. Start building.</h2>
+    <div class="days" id="dayChips"></div>
+    <div class="player" id="player">
+      <div class="p-top"><span id="pDay">Day 1</span><span id="pCount">1 / 5</span></div>
+      <div class="p-label">Type this in Spanish:</div>
+      <div class="p-prompt" id="pPrompt"></div>
+      <div class="p-note" id="pNote"></div>
+
+      <div id="pInputZone">
+        <div class="accents" id="accents"></div>
+        <div class="answer-row">
+          <input id="pInput" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Escribe aquí…">
+          <button class="btn-check" id="btnCheck">Revisar</button>
+        </div>
+        <button class="stuck" id="btnStuck">No sé — muéstrame ↓</button>
+      </div>
+
+      <div class="feedback" id="pFeedback"></div>
+      <div class="p-prog" id="pProg"></div>
     </div>
   </div>
 </section>
 
-<!-- INTERACTIVE DEMO -->
-<section class="demo" id="try">
+<!-- JOURNEY -->
+<section class="journey">
   <div class="wrap">
-    <div class="reveal" style="text-align:center">
-      <div class="kicker" style="color:var(--rojo)">Try it · 60 seconds</div>
-      <h2 class="sec-h" style="margin:0 auto 1.1rem">Feel the loop.</h2>
-      <p class="sec-sub" style="margin:0 auto 3rem">Read the prompt. Say it out loud — really, out loud. Then reveal the answer and rate yourself. That's the whole engine.</p>
-    </div>
-    <div class="demo-card reveal" id="demoCard">
-      <div class="demo-step"><span id="demoTitle">El motor · quiero</span><span id="demoCount">1 / 5</span></div>
-      <div class="demo-prompt-label">Say this in Spanish, out loud:</div>
-      <div class="demo-prompt" id="demoPrompt">"I want to speak."</div>
-      <div class="demo-hint" id="demoHint">Take your time. Think it through, then say it.</div>
-
-      <div class="demo-answer" id="demoAnswer">
-        <div class="es" id="demoEs">Quiero hablar.</div>
-        <span class="say" id="demoSay">🔊 kee-EH-roh ah-BLAR</span>
-      </div>
-
-      <div class="demo-actions" id="demoActions">
-        <button class="da reveal" id="btnReveal">Mostrar la respuesta</button>
-      </div>
-      <div class="demo-actions" id="demoRate" style="display:none">
-        <button class="da green" data-r="green">🟢 Lo dije</button>
-        <button class="da yellow" data-r="yellow">🟡 Casi</button>
-        <button class="da red" data-r="red">🔴 Se me fue</button>
-      </div>
-
-      <div class="demo-progress" id="demoProg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- ROADMAP -->
-<section class="road" id="road">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">The 90-day journey</div>
-      <h2 class="sec-h">Beginner to real conversation — as a trip across Colombia.</h2>
-      <p class="sec-sub">~20 minutes a day. Six stages, each one a <i>capability</i> you walk away with — not a topic you sat through. From the Caribbean coast up into the Andes.</p>
-    </div>
+    <div class="kicker">What's ahead · 90 days</div>
+    <h2 class="sec-h" style="color:#fff">A trip across Colombia.</h2>
     <div class="stages">
-      <div class="stage reveal"><div class="sn">1</div><div><h4><em>Arranque</em> · Ignition</h4><p>Build sentences instantly with cognates + engine verbs (want / can / have to / going to + any verb). Speak in session one.</p></div><div class="meta">Days 1–12<span class="cefr">A0→A1</span></div></div>
-      <div class="stage reveal"><div class="sn">2</div><div><h4><em>El Presente</em></h4><p>Talk about now — regular & key irregular verbs, asking questions, saying no, "doing it right now."</p></div><div class="meta">Days 13–30<span class="cefr">A1</span></div></div>
-      <div class="stage reveal"><div class="sn">3</div><div><h4><em>Conexiones</em></h4><p>The glue of real speech: because, but, so, when, if — plus pronouns (it, to him, for us).</p></div><div class="meta">Days 31–48<span class="cefr">A1→A2</span></div></div>
-      <div class="stage reveal"><div class="sn">4</div><div><h4><em>El Pasado</em></h4><p>Tell what happened. Past tenses learned through contrast, never conjugation tables.</p></div><div class="meta">Days 49–66<span class="cefr">A2</span></div></div>
-      <div class="stage reveal"><div class="sn">5</div><div><h4><em>El Futuro y los Deseos</em></h4><p>Future, "would," and the subjunctive introduced gently as the mood of doubt and wishing.</p></div><div class="meta">Days 67–82<span class="cefr">A2→B1</span></div></div>
-      <div class="stage reveal"><div class="sn">6</div><div><h4><em>Conversación Real</em></h4><p>Idioms, Colombian expressions, speed, register, and unscripted speaking with a real <i>parce</i>.</p></div><div class="meta">Days 83–90<span class="cefr">B1</span></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- DAILY 20 -->
-<section>
-  <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">The daily 20</div>
-      <h2 class="sec-h">The same calm shape, every day.</h2>
-      <p class="sec-sub">Familiarity lowers stress. The structure never changes — only the content escalates.</p>
-    </div>
-    <div class="daily-grid">
-      <div class="step-card reveal"><div class="t">2 min</div><div class="num">①</div><h4>Warm recall</h4><p>A few due phrases return, spaced just right.</p></div>
-      <div class="step-card reveal"><div class="t">8 min</div><div class="num">②</div><h4>New build</h4><p>The teacher introduces a piece and builds sentences with you.</p></div>
-      <div class="step-card reveal"><div class="t">5 min</div><div class="num">③</div><h4>Speak it</h4><p>Reveal-then-self-rate speaking ladder — the confidence core.</p></div>
-      <div class="step-card reveal"><div class="t">3 min</div><div class="num">④</div><h4>Listen & catch</h4><p>Colombian audio at real speed. You decode it.</p></div>
-      <div class="step-card reveal"><div class="t">2 min</div><div class="num">⑤</div><h4>The closer</h4><p>One long victory sentence. The dopamine hit.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- FIRST WEEK -->
-<section class="days" id="days">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">Your first 7 days</div>
-      <h2 class="sec-h">By Friday, a real conversation.</h2>
-      <p class="sec-sub">Tap through the week. Notice you never memorize — you just keep clicking known pieces into bigger sentences.</p>
-    </div>
-    <div class="day-tabs reveal" id="dayTabs"></div>
-    <div class="day-panel reveal" id="dayPanel"></div>
-  </div>
-</section>
-
-<!-- ADDICTIVE / FEATURES -->
-<section>
-  <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">Fun, simple, addictive</div>
-      <h2 class="sec-h">Healthy addiction: the pull of getting visibly good.</h2>
-      <p class="sec-sub">No angry mascot. No guilt notifications. Just momentum you can feel.</p>
-    </div>
-    <div class="feat-grid">
-      <div class="feat reveal"><span class="tag">North star</span><div class="ic">🗣️</div><h4>The victory sentence</h4><p>Every session ends on a long sentence that makes you think "wait — I just said that." Competence is the strongest hook there is.</p></div>
-      <div class="feat reveal"><div class="ic">🗺️</div><h4>The Colombia map</h4><p>Climb from Cartagena to Bogotá to the Amazon. Each region unlocks an illustrated postcard and a local phrase.</p></div>
-      <div class="feat reveal"><span class="tag">Humane</span><div class="ic">🔥</div><h4>Guilt-free streaks</h4><p>Miss a day? <i>"¡Tranquilo, parce! Tu racha está a salvo."</i> Two free freezes a month, auto-applied. No shame, ever.</p></div>
-      <div class="feat reveal"><div class="ic">📈</div><h4>"Lo que puedo decir"</h4><p>Progress shown as growing <i>power</i> — "I can talk about the past" — not a pile of words you owe.</p></div>
-      <div class="feat reveal"><div class="ic">☕</div><h4>El Tinto del Día</h4><p>A daily surprise: a slang drop, a culture note, a phrase like <i>"¡No dar papaya!"</i></p></div>
-      <div class="feat reveal"><div class="ic">🎖️</div><h4>Badges that mean something</h4><p>Earned for real capability — <i>Pedí un Tinto</i>, <i>Viajero del Tiempo</i>, <i>Parcero de Verdad</i>.</p></div>
+      <div class="stage"><div class="sn">1</div><div><h4><em>Arranque</em> · Ignition</h4><p>Cognates + engine verbs: want / can / have to / going to + any verb.</p></div><div class="meta">Days 1–12</div></div>
+      <div class="stage"><div class="sn">2</div><div><h4><em>El Presente</em></h4><p>Talk about now — verbs, questions, saying no.</p></div><div class="meta">Days 13–30</div></div>
+      <div class="stage"><div class="sn">3</div><div><h4><em>Conexiones</em></h4><p>Because, but, so, when, if — plus pronouns.</p></div><div class="meta">Days 31–48</div></div>
+      <div class="stage"><div class="sn">4</div><div><h4><em>El Pasado</em></h4><p>Tell what happened, through contrast not tables.</p></div><div class="meta">Days 49–66</div></div>
+      <div class="stage"><div class="sn">5</div><div><h4><em>Futuro y Deseos</em></h4><p>Future, "would," and the subjunctive of wishing.</p></div><div class="meta">Days 67–82</div></div>
+      <div class="stage"><div class="sn">6</div><div><h4><em>Conversación Real</em></h4><p>Idioms, Colombian expressions, real conversation.</p></div><div class="meta">Days 83–90</div></div>
     </div>
   </div>
 </section>
 
 <!-- MILESTONES -->
-<section class="dev">
+<section>
   <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">Milestones</div>
-      <h2 class="sec-h">30, 60, 90.</h2>
-      <p class="sec-sub">Honest targets at 20 minutes a day. Under-promise, over-deliver.</p>
-    </div>
+    <div class="kicker">Milestones</div>
+    <h2 class="sec-h">Where you'll be.</h2>
     <div class="miles">
-      <div class="mile m30 reveal"><div class="big">30</div><div class="cefr">CEFR A1 · ~300 words</div><ul><li>Café & taxi, handled</li><li>Ask and answer questions</li><li>Want / can / have-to / will, any verb</li><li>Arrive in Medellín 🏅</li></ul></div>
-      <div class="mile m60 reveal"><div class="big">60</div><div class="cefr">CEFR A2 · ~700 words</div><ul><li>Tell stories in the past</li><li>Link ideas: because / but / when / if</li><li>Market, doctor, plans with friends</li><li>Arrive in Bogotá 🏅</li></ul></div>
-      <div class="mile m90 reveal"><div class="big">90</div><div class="cefr">CEFR A2+/B1 · ~1,200 words</div><ul><li>Hold a ~10-min real conversation</li><li>Future, "would," wishes</li><li>Switch formal ↔ <i>parce</i>-casual</li><li>Parcero de Verdad 🏆</li></ul></div>
+      <div class="mile m30"><div class="big">30</div><div class="cefr">A1 · ~300 words</div><ul><li>Café & taxi, handled</li><li>Ask and answer questions</li><li>Want / can / have-to / will</li></ul></div>
+      <div class="mile m60"><div class="big">60</div><div class="cefr">A2 · ~700 words</div><ul><li>Tell stories in the past</li><li>Link ideas naturally</li><li>Market, doctor, plans</li></ul></div>
+      <div class="mile m90"><div class="big">90</div><div class="cefr">A2+/B1 · ~1,200 words</div><ul><li>A ~10-min real conversation</li><li>Future, "would," wishes</li><li>Formal ↔ <i>parce</i>-casual</li></ul></div>
     </div>
   </div>
 </section>
 
-<!-- DEV SPEC -->
-<section class="dev" id="dev">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="kicker">For developers</div>
-      <h2 class="sec-h">Build-ready spec.</h2>
-      <p class="sec-sub">Content is data, not code — lessons ship as structured JSON, OTA-updatable. Full schema, SRS algorithm, and roadmap live in the repo.</p>
-    </div>
-    <div class="spec-grid">
-      <div class="reveal">
-        <table class="stack-table">
-          <tr><td>Client</td><td>React Native + Expo (TypeScript)</td></tr>
-          <tr><td>Audio</td><td>expo-av · streaming + cached offline</td></tr>
-          <tr><td>Speaking</td><td>Reveal-then-self-rate (ASR-ready seam for v2)</td></tr>
-          <tr><td>Local</td><td>Zustand + MMKV + SQLite (SRS + offline)</td></tr>
-          <tr><td>Backend</td><td>Supabase — Postgres, Auth, Storage, Edge</td></tr>
-          <tr><td>TTS</td><td>ElevenLabs Colombian voices · build-time</td></tr>
-          <tr><td>Payments</td><td>RevenueCat · paywall after Day 7</td></tr>
-          <tr><td>Analytics</td><td>PostHog · north-star = Day-1 victory sentence</td></tr>
-        </table>
-        <div class="palette">
-          <div class="sw" style="background:var(--amarillo);color:var(--ink)">amarillo<br>#FCD116</div>
-          <div class="sw" style="background:var(--azul);color:#fff">azul<br>#003893</div>
-          <div class="sw" style="background:var(--rojo);color:#fff">rojo<br>#CE1126</div>
-        </div>
-      </div>
-      <div class="reveal">
-<pre><span class="c">// SRS — SM-2 variant, the MT touch</span>
-on self_rate(item, rating):
-  q = {lost:1, close:3, got_it:5}[rating]
-  if q &lt; 3:
-    interval = 1
-    ease = max(1.3, ease - 0.2)
-    flag_for_reteach(item)   <span class="c">// re-explained</span>
-  else:
-    interval = reps==0 ? 1
-             : reps==1 ? 3
-             : round(interval * ease)
-    ease = clamp(ease + 0.1, 1.3, 2.8)
-  reps = (q &lt; 3) ? 0 : reps + 1
-  due_date = today + interval
-  if reps &gt;= 4 and interval &gt; 35:
-    graduate(item)  <span class="c">// kept alive by use</span></pre>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
 <footer>
   <div class="wrap">
     <div class="flagdots"><span style="background:var(--amarillo)"></span><span style="background:var(--azul)"></span><span style="background:var(--rojo)"></span></div>
-    <h3>Listo, parce. ¿Empezamos?</h3>
-    <p style="color:rgba(255,247,222,.7);max-width:46ch;margin:0 auto">The full concept, curriculum, and developer spec live in the repo.</p>
-    <a class="gh" href="https://github.com/nickmuscolinotub/parce-spanish-app" target="_blank" rel="noopener">⭐ View Parce on GitHub</a>
-    <p class="fine">Design concept inspired by the public pedagogical principles of the Michel Thomas method (guided discovery, no rote memorization, constant recall, confidence through speaking). Not affiliated with, endorsed by, or derived from the proprietary Michel Thomas course materials. Original Spanish curriculum.</p>
+    <h3>Listo, parce. Nos vemos mañana.</h3>
+    <p>Show up most days. That's the whole secret.</p>
+    <button class="reset" id="btnReset">Reset my progress</button>
+    <p class="fine">A personal learning tool built on the public principles of the Michel Thomas method — guided discovery, no rote memorization, confidence through building. Original Colombian-Spanish curriculum.</p>
   </div>
 </footer>
 
 <script>
-  // nav hide on scroll down
-  let lastY=0;const nav=document.getElementById('nav');
-  addEventListener('scroll',()=>{const y=scrollY;nav.style.transform=(y>lastY&&y>200)?'translateY(-120%)':'none';lastY=y;});
-
-  // reveal on scroll
-  const io=new IntersectionObserver((es)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%6*60)+'ms';io.observe(el);});
-
-  // ── interactive demo ──
-  const DEMO=[
-    {p:'"I want to speak."',es:'Quiero hablar.',say:'🔊 kee-EH-roh ah-BLAR'},
-    {p:'"I want to eat now."',es:'Quiero comer ahora.',say:'🔊 ...koh-MEHR ah-OH-rah'},
-    {p:'"Can I do it?"',es:'¿Puedo hacerlo?',say:'🔊 PWEH-doh ah-SEHR-loh'},
-    {p:'"I have to work, but I want a coffee."',es:'Tengo que trabajar, pero quiero un tinto.',say:'🔊 ...PEH-roh kee-EH-roh oon TEEN-toh'},
-    {p:'"I want to speak Spanish with you tomorrow."',es:'Quiero hablar español contigo mañana.',say:'🔊 ...kon-TEE-goh mah-NYAH-nah'}
-  ];
-  let di=0;
-  const $=id=>document.getElementById(id);
-  const prog=$('demoProg');
-  DEMO.forEach(()=>{const s=document.createElement('span');prog.appendChild(s);});
-  const progSpans=[...prog.children];
-  function render(){
-    const d=DEMO[di];
-    $('demoPrompt').textContent=d.p;
-    $('demoEs').textContent=d.es;
-    $('demoSay').textContent=d.say;
-    $('demoCount').textContent=(di+1)+' / '+DEMO.length;
-    $('demoAnswer').classList.remove('show');
-    $('demoActions').style.display='flex';
-    $('demoRate').style.display='none';
-    $('demoHint').style.display='block';
-  }
-  $('btnReveal').onclick=()=>{
-    $('demoAnswer').classList.add('show');
-    $('demoActions').style.display='none';
-    $('demoRate').style.display='flex';
-    $('demoHint').style.display='none';
-  };
-  $('demoRate').querySelectorAll('.da').forEach(b=>{
-    b.onclick=()=>{
-      progSpans[di].classList.add('done');
-      if(di<DEMO.length-1){di++;render();}
-      else finish();
-    };
-  });
-  function finish(){
-    $('demoPrompt').textContent='';
-    $('demoHint').style.display='none';
-    $('demoActions').style.display='none';
-    $('demoRate').style.display='none';
-    $('demoAnswer').classList.remove('show');
-    $('demoTitle').textContent='¡Sesión completa!';
-    const card=$('demoCard');
-    const done=document.createElement('div');
-    done.className='demo-done';
-    done.innerHTML='<div style="font-size:2.4rem">🎉</div><div class="es">¡Bien hecho, parce!</div><p style="color:rgba(255,247,222,.72);margin-top:.6rem">You just built 5 Spanish sentences — and never saw a vocab list. <span class="xp-pop">+90 ⭐</span></p><button class="da reveal" style="margin-top:1.4rem;max-width:200px" onclick="restartDemo()">Otra vez ↻</button>';
-    $('demoPrompt').replaceWith(done);
-  }
-  window.restartDemo=()=>{location.hash='#try';location.reload();};
-  render();
-
-  // ── first-week tabs ──
+  // ---------- content: Days 1–7 ----------
   const DAYS=[
-    {n:1,t:'Cognates + "Es"',ex:[['"It is possible."','Es posible.'],['"It is very important for me."','Es muy importante para mí.']],v:['"It is possible, but it is not important for me."','Es posible, pero no es importante para mí.']},
-    {n:2,t:'The engine: quiero',ex:[['"I want to speak."','Quiero hablar.'],['"I want to speak Spanish with you."','Quiero hablar español contigo.']],v:['"I want to speak Spanish, but I don\'t want to eat now."','Quiero hablar español, pero no quiero comer ahora.']},
-    {n:3,t:'puedo + questions',ex:[['"Can I eat now?"','¿Puedo comer ahora?'],['"I can do it."','Puedo hacerlo.']],v:['"Can I do it now, or is it not possible?"','¿Puedo hacerlo ahora, o no es posible?']},
-    {n:4,t:'tengo que + el tinto ☕',ex:[['"I have to work."','Tengo que trabajar.'],['"I want a tinto, but I have to work."','Quiero un tinto, pero tengo que trabajar.']],v:['"I can\'t speak now because I have to work."','No puedo hablar ahora porque tengo que trabajar.']},
-    {n:5,t:'voy a — the easy future',ex:[['"I\'m going to eat now."','Voy a comer ahora.'],['"Tomorrow."','Mañana.']],v:['"Today I have to work, but tomorrow I\'m going to speak Spanish with you."','Hoy tengo que trabajar, pero mañana voy a hablar español contigo.']},
-    {n:6,t:'¿Quieres…? + ¡chévere!',ex:[['"Do you want to eat now?"','¿Quieres comer ahora?'],['"Can you speak Spanish?"','¿Puedes hablar español?']],v:['"Do you want to speak Spanish with me tomorrow? — Listo, cool!"','¿Quieres hablar español conmigo mañana? — Listo, ¡qué chévere!']},
-    {n:7,t:'First conversation',ex:[['A parce writes:','"¡Quiubo! ¿Quieres tomar un tinto hoy?"'],['You reply, unscripted →','(everything you own, clicked together)']],v:['Checkpoint: arrive in Cartagena 🏖️ + earn ☕ Pedí un Tinto','¡Listo!']}
+    {n:1,t:"Cognates + Es",items:[
+      {en:'"It is possible."',es:'Es posible.'},
+      {en:'"It is important."',es:'Es importante.'},
+      {en:'"It is not possible."',es:'No es posible.'},
+      {en:'"It is very important for me."',es:'Es muy importante para mí.'},
+      {en:'"It is possible, but it is not important for me."',es:'Es posible, pero no es importante para mí.',v:true}
+    ]},
+    {n:2,t:"The engine: quiero",items:[
+      {en:'"I want to speak."',es:'Quiero hablar.'},
+      {en:'"I want to eat."',es:'Quiero comer.'},
+      {en:'"I want to speak Spanish."',es:'Quiero hablar español.'},
+      {en:'"I want to speak Spanish with you."',es:'Quiero hablar español contigo.'},
+      {en:'"I want to speak Spanish, but I don’t want to eat now."',es:'Quiero hablar español, pero no quiero comer ahora.',v:true}
+    ]},
+    {n:3,t:"puedo + questions",items:[
+      {en:'"I can speak Spanish."',es:'Puedo hablar español.'},
+      {en:'"Can I eat now?"',es:'¿Puedo comer ahora?'},
+      {en:'"I can do it."',es:'Puedo hacerlo.'},
+      {en:'"Can I do it now?"',es:'¿Puedo hacerlo ahora?'},
+      {en:'"Can I do it now, or is it not possible?"',es:'¿Puedo hacerlo ahora, o no es posible?',v:true}
+    ]},
+    {n:4,t:"tengo que + el tinto",items:[
+      {en:'"I have to work."',es:'Tengo que trabajar.'},
+      {en:'"I have to go now."',es:'Tengo que ir ahora.'},
+      {en:'"I want a coffee."',es:'Quiero un tinto.',note:'In Colombia a small black coffee is "un tinto".'},
+      {en:'"I want a coffee, but I have to work."',es:'Quiero un tinto, pero tengo que trabajar.'},
+      {en:'"I can’t speak now because I have to work."',es:'No puedo hablar ahora porque tengo que trabajar.',v:true}
+    ]},
+    {n:5,t:"voy a — the easy future",items:[
+      {en:'"I’m going to speak Spanish."',es:'Voy a hablar español.'},
+      {en:'"I’m going to eat now."',es:'Voy a comer ahora.'},
+      {en:'"Tomorrow I’m going to work."',es:'Mañana voy a trabajar.'},
+      {en:'"Today I have to work, but tomorrow I’m going to speak Spanish with you."',es:'Hoy tengo que trabajar, pero mañana voy a hablar español contigo.',v:true}
+    ]},
+    {n:6,t:"¿Quieres…? ¿Puedes…?",items:[
+      {en:'"Do you want to eat now?"',es:'¿Quieres comer ahora?'},
+      {en:'"Can you speak Spanish?"',es:'¿Puedes hablar español?'},
+      {en:'"Do you want a coffee?"',es:'¿Quieres un tinto?'},
+      {en:'"Do you want to speak Spanish with me tomorrow?"',es:'¿Quieres hablar español conmigo mañana?',v:true}
+    ]},
+    {n:7,t:"Putting it together",items:[
+      {en:'"I want a coffee with you today."',es:'Quiero un tinto contigo hoy.'},
+      {en:'"Can you speak Spanish now?"',es:'¿Puedes hablar español ahora?'},
+      {en:'"I’m going to speak Spanish tomorrow."',es:'Voy a hablar español mañana.'},
+      {en:'"Do you want to speak Spanish with me tomorrow, or is it not possible?"',es:'¿Quieres hablar español conmigo mañana, o no es posible?',v:true}
+    ]}
   ];
-  const tabs=$('dayTabs'),panel=$('dayPanel');
-  function paintDay(i){
-    [...tabs.children].forEach((b,j)=>b.classList.toggle('active',i===j));
-    const d=DAYS[i];
-    panel.innerHTML='<div class="dtitle">Day '+d.n+' · '+d.t+'</div>'+
-      d.ex.map(e=>'<div class="exch"><div class="q">'+e[0]+'</div><div class="a">'+e[1]+'</div></div>').join('')+
-      '<div class="victory"><div class="lbl">'+(d.n===7?'Checkpoint':'Victory sentence')+'</div><div class="q" style="margin-top:.3rem">'+d.v[0]+'</div><div class="a">'+d.v[1]+'</div></div>';
+
+  // ---------- storage ----------
+  const KEY='parce.v1';
+  const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return{}}};
+  const save=s=>localStorage.setItem(KEY,JSON.stringify(s));
+  let state=Object.assign({xp:0,completed:[],streak:0,lastDate:null},load());
+  const $=id=>document.getElementById(id);
+  function paintStats(){$('statXp').textContent=state.xp;$('statStreak').textContent=state.streak;}
+  function todayStr(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+  function bumpStreak(){
+    const t=todayStr();
+    if(state.lastDate===t)return;
+    const y=new Date();y.setDate(y.getDate()-1);
+    const ys=y.getFullYear()+'-'+(y.getMonth()+1)+'-'+y.getDate();
+    state.streak=(state.lastDate===ys)?state.streak+1:1;
+    state.lastDate=t;
   }
-  DAYS.forEach((d,i)=>{const b=document.createElement('button');b.className='day-tab';b.textContent=d.n;b.onclick=()=>paintDay(i);tabs.appendChild(b);});
-  paintDay(0);
+  paintStats();
+
+  // ---------- matching ----------
+  const norm=s=>s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[¿?¡!.,;:"'`]/g,'').replace(/\s+/g,' ').trim();
+  function lev(a,b){const m=[];for(let i=0;i<=b.length;i++)m[i]=[i];for(let j=0;j<=a.length;j++)m[0][j]=j;
+    for(let i=1;i<=b.length;i++)for(let j=1;j<=a.length;j++)m[i][j]=b[i-1]===a[j-1]?m[i-1][j-1]:Math.min(m[i-1][j-1]+1,m[i][j-1]+1,m[i-1][j]+1);
+    return m[b.length][a.length];}
+
+  // ---------- player ----------
+  let dayIdx=0, qIdx=0, awarded=0;
+  const chips=$('dayChips');
+  DAYS.forEach((d,i)=>{const b=document.createElement('button');b.className='day-chip';b.textContent=d.n;b.onclick=()=>openDay(i);chips.appendChild(b);});
+  function paintChips(){[...chips.children].forEach((c,i)=>{c.classList.toggle('active',i===dayIdx);c.classList.toggle('done',state.completed.includes(DAYS[i].n));});}
+
+  const accentChars=['á','é','í','ó','ú','ñ','¿','¡'];
+  const accBox=$('accents');
+  accentChars.forEach(ch=>{const b=document.createElement('button');b.type='button';b.textContent=ch;b.onclick=()=>insertAtCursor(ch);accBox.appendChild(b);});
+  function insertAtCursor(ch){const el=$('pInput');const s=el.selectionStart,e=el.selectionEnd;el.value=el.value.slice(0,s)+ch+el.value.slice(e);el.selectionStart=el.selectionEnd=s+ch.length;el.focus();}
+
+  function openDay(i){dayIdx=i;qIdx=0;awarded=0;buildProg();paintChips();renderQ();$('train').scrollIntoView({behavior:'smooth'});}
+  function buildProg(){const p=$('pProg');p.innerHTML='';DAYS[dayIdx].items.forEach(()=>p.appendChild(document.createElement('span')));}
+  function renderQ(){
+    const d=DAYS[dayIdx],it=d.items[qIdx];
+    $('pDay').textContent='Day '+d.n+' · '+d.t;
+    $('pCount').textContent=(qIdx+1)+' / '+d.items.length;
+    $('pPrompt').textContent=it.v?('★ '+it.en):it.en;
+    $('pNote').textContent=it.note||(it.v?'Your victory sentence — the big one.':'');
+    $('pInput').value='';
+    $('pInputZone').style.display='block';
+    $('pFeedback').className='feedback';$('pFeedback').innerHTML='';
+    setTimeout(()=>$('pInput').focus(),50);
+  }
+  function showFeedback(kind,it){
+    const fb=$('pFeedback');
+    const verdict=kind==='ok'?'¡Correcto! ⭐ +'+(it.v?25:10):kind==='casi'?'¡Casi! ⭐ +5':'Así se dice 👇';
+    const tip=kind==='ok'?(it.v?'That’s a real Spanish sentence. ¡Bien hecho!':'Click — another piece in place.'):kind==='casi'?'You were one keystroke away — look at the model:':'No pasa nada. Read it, say it once, and move on.';
+    fb.className='feedback show '+kind;
+    fb.innerHTML='<div class="verdict">'+verdict+'</div><div class="es">'+it.es+'</div><div class="tip">'+tip+'</div>'+
+      '<button class="btn-next" id="btnNext">'+(qIdx<DAYS[dayIdx].items.length-1?'Siguiente →':'Terminar sesión ✓')+'</button>';
+    $('pInputZone').style.display='none';
+    $('btnNext').onclick=next;
+  }
+  function check(forceReveal){
+    const it=DAYS[dayIdx].items[qIdx];
+    if(forceReveal){showFeedback('miss',it);return;}
+    const a=norm($('pInput').value), b=norm(it.es);
+    if(!a){showFeedback('miss',it);return;}
+    if(a===b){awarded+=it.v?25:10;showFeedback('ok',it);}
+    else if(lev(a,b)<=2 && a.length>4){awarded+=5;showFeedback('casi',it);}
+    else{showFeedback('miss',it);}
+    paintStats.tmp=state.xp+awarded; // live preview not persisted until finish
+    $('statXp').textContent=state.xp+awarded;
+  }
+  function next(){
+    $('pProg').children[qIdx].classList.add('done');
+    if(qIdx<DAYS[dayIdx].items.length-1){qIdx++;renderQ();}
+    else finish();
+  }
+  function finish(){
+    state.xp+=awarded;
+    if(!state.completed.includes(DAYS[dayIdx].n))state.completed.push(DAYS[dayIdx].n);
+    bumpStreak();save(state);paintStats();paintChips();
+    $('pInputZone').style.display='none';
+    $('pFeedback').className='feedback';$('pFeedback').innerHTML='';
+    const nextDay=dayIdx<DAYS.length-1?dayIdx+1:null;
+    $('pPrompt').innerHTML='';
+    $('pDay').textContent='Day '+DAYS[dayIdx].n+' complete';
+    $('pCount').textContent='';
+    $('pNote').textContent='';
+    const host=$('player').querySelector('.p-prompt');
+    host.innerHTML='<div class="p-finish"><div class="big">🎉</div><div class="es">¡Bien hecho, parce!</div>'+
+      '<p style="color:rgba(255,247,222,.72);margin:.4rem 0 1rem">You built '+DAYS[dayIdx].items.length+' sentences — no vocab list in sight. <span class="xp-pop">+'+awarded+' ⭐</span></p>'+
+      (nextDay!==null?'<button class="btn-check" id="btnGoNext" style="padding:.8rem 1.5rem">Day '+DAYS[nextDay].n+' →</button> ':'<p style="color:var(--amarillo);font-family:Fraunces;font-size:1.2rem">You’ve finished week one. 🇨🇴</p>')+
+      ' <button class="btn-next" id="btnRedo" style="background:transparent;border:1px solid rgba(255,247,222,.3);color:var(--crema)">Repeat this day ↻</button></div>';
+    if(nextDay!==null)$('btnGoNext').onclick=()=>{const h=$('player').querySelector('.p-prompt');h.className='p-prompt';h.innerHTML='';openDay(nextDay);};
+    $('btnRedo').onclick=()=>{const h=$('player').querySelector('.p-prompt');h.className='p-prompt';h.innerHTML='';openDay(dayIdx);};
+  }
+
+  $('btnCheck').onclick=()=>check(false);
+  $('pInput').addEventListener('keydown',e=>{if(e.key==='Enter')check(false);});
+  $('btnStuck').onclick=()=>check(true);
+  $('btnReset').onclick=()=>{if(confirm('Reset all progress, XP and streak?')){state={xp:0,completed:[],streak:0,lastDate:null};save(state);paintStats();paintChips();openDay(0);}};
+
+  // resume on the first not-yet-completed day
+  const firstIncomplete=DAYS.findIndex(d=>!state.completed.includes(d.n));
+  openDay(firstIncomplete===-1?0:firstIncomplete);
+  if(state.completed.length){$('greeting').textContent='Welcome back, parce. '+state.completed.length+' day'+(state.completed.length>1?'s':'')+' done — pick up where you left off.';}
+
+  // PWA
+  if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
 </html>

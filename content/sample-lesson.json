@@ -1,0 +1,40 @@
+{
+  "id": "s1-d02",
+  "stage": 1,
+  "day": 2,
+  "title": "El motor: quiero",
+  "region_unlock": null,
+  "segments": [
+    {
+      "type": "warm_recall",
+      "item_ids": ["es", "posible", "para_mi"]
+    },
+    {
+      "type": "build",
+      "steps": [
+        { "teach": "'I want' is one word: quiero. After it, the verb stays in its 'to ___' form.", "audio": "tts/quiero_intro.mp3" },
+        { "prompt_en": "I want to speak.", "answer_es": "Quiero hablar.", "audio_answer": "tts/quiero_hablar.mp3", "pause_ms": 4000 },
+        { "prompt_en": "I want to eat.", "answer_es": "Quiero comer.", "audio_answer": "tts/quiero_comer.mp3", "pause_ms": 4000 }
+      ]
+    },
+    {
+      "type": "speak_self_rate",
+      "items": [
+        { "prompt_en": "I want to speak Spanish with you.", "answer_es": "Quiero hablar español contigo.", "audio_answer": "tts/q_hablar_esp_contigo.mp3" }
+      ]
+    },
+    {
+      "type": "listen_catch",
+      "audio": "tts/d02_listen.mp3",
+      "transcript": "Quiero hablar español, pero no quiero comer ahora.",
+      "catch_words": ["quiero", "hablar", "comer", "ahora"]
+    },
+    {
+      "type": "victory",
+      "prompt_en": "I want to speak Spanish, but I don't want to eat now.",
+      "answer_es": "Quiero hablar español, pero no quiero comer ahora.",
+      "audio_answer": "tts/d02_victory.mp3",
+      "xp": 25
+    }
+  ]
+}
